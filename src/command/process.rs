@@ -1,8 +1,9 @@
-use super::{Command, builtin::exit};
+use super::{Command, builtin::command::exit};
 
 pub fn process_command(command: Command) {
     match command.name.as_str() {
         "exit" => exit(command),
-        _ => ()
+        "" => (),
+        other => println!("{other}: command not found")
     }
 }
