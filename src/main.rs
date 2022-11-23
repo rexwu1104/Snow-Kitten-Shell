@@ -1,16 +1,13 @@
-use command::{Commander, process::process_command};
-
-mod stream;
+mod data;
+mod format;
 mod command;
-mod signal;
 
-fn main() -> anyhow::Result<()> {
-    let mut commander = Commander::new();
-    commander.welcome();
+fn main() {
+    // println!("{}", format::Format::from(r#""count numbers" args -cc=help --so "options or more" = "insert args" --鍵=值"#).transform());
+    let input = data::Input::new();
 
-    for command in commander {
-        process_command(command)
+    input.welcome_message();
+    for c in input {
+        println!("{:#?}", c);
     }
-
-    Ok(())
 }
