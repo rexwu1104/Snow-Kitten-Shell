@@ -15,7 +15,7 @@ impl Format {
         let mut idx = 0;
 
         let args_regex = regex::Regex::new(r#"[ ]?([^" ]+|"(?:[^\\"]|\\"| )*"?)"#).unwrap();
-        let option_regex = regex::Regex::new(r#"(?:\B-|--)([^"-= ]+)(?:=+| +)?([^"\-= ]+|"(?:[^\\"]|\\"| )*")?"#).unwrap();
+        let option_regex = regex::Regex::new(r#"(?:\B-|--|/)([^"-= ]+)(?:=+| +)?([^"\-= ]+|"(?:[^\\"]|\\"| )*")?"#).unwrap();
 
         let mut command = None;
         let mut args = vec![];

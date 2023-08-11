@@ -1,8 +1,9 @@
 use crate::data::KeyBoardSignalGenerator;
 
 mod impls;
+mod system;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Command {
     name: String,
     args: Vec<String>,

@@ -2,12 +2,12 @@ mod impls;
 mod signal;
 mod messages;
 
-use std::path::PathBuf;
+use std::{path::PathBuf, thread::Thread, any::Any, process::Child};
 
-use crossbeam_channel::Receiver;
+use crossbeam_channel::{Receiver, Sender};
 use crossterm::event::KeyEvent;
 
-pub struct Input {
+pub struct Input<'a> {
     user_name: String,
     path: PathBuf,
     permission: Permission,
@@ -15,7 +15,13 @@ pub struct Input {
 
     cursor: usize,
     history: Vec<String>,
-    generator: KeyBoardSignalGenerator
+    generator: KeyBoardSignalGenerator,
+
+    bin_files: Vec<PathBuf>,
+    processing: Option<Child>,
+
+    sender: Sender<&'a dyn Any>,
+    receiver: Receiver<&'a dyn Any>,
 }
 
 pub(super) enum Permission {
